@@ -31,6 +31,7 @@ public:
 			}
 			else
 			{
+				/* 移位超过32位，未定义 */
 				if(count >= 31)
 				{
 					bit_carry = 0;
