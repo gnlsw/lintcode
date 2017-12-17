@@ -47,10 +47,32 @@ public:
     }
 };
 
+class Solution_B
+{
+public:
+	int aplusb(int a, int b)
+	{
+		int left = a;
+		int right = b;
+		int sum = 0;
+		int carry = 0;
+		do{
+			sum = left ^ right;
+			carry = (left & right) << 1;
+			left = sum;
+			right = carry;
+		} while(carry != 0);
+
+		return sum;
+	}
+};
+
 int main()
 {
-    Solution s;
-    s.aplusb(100 ,-100);
-
+	Solution s;
+	s.aplusb(100 , -100);
+    Solution_B s2;
+	s2.aplusb(100, -100);
+    
     return 0;
 }
