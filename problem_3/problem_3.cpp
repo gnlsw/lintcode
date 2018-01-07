@@ -163,9 +163,13 @@ public:
      */
     int digitCounts(int k, int n)
 	{
-		int count_sum = 0;
+		if((n == 0) && (k == 0))
+		{
+			return 1;
+		}
 
 		/* 计算个位的数值、左侧的数值 */
+		int count_sum = 0;
 		int base = 1;
 		int right_num = n % base;
 		int current_digital = n % (10 * base);   // 6
@@ -174,24 +178,22 @@ public:
 		while((left_num != 0) || (current_digital != 0))
 		{
 			int count;
-			if(k != 0)
+			if(current_digital > k)
 			{
-				if(current_digital > k)
-				{
-					count = (left_num + 1) * base;
-				}
-				else if(current_digital == k)
-				{
-					count = left_num * base + (right_num + 1);
-				}
-				else
-				{
-					count = left_num * base;
-				}
+				count = (left_num + 1) * base;
+			}
+			else if(current_digital == k)
+			{
+				count = left_num * base + (right_num + 1);
 			}
 			else
 			{
-				count = 0; // k = 0如何处理？
+				count = left_num * base;
+			}
+
+			if((k == 0) && (base != 1))
+			{
+				count -= base;
 			}
 
 			count_sum += count;
@@ -216,13 +218,14 @@ int main()
 	Solution_A s_a;
 	Solution_C s_c;
 
-	for(int n = 1; n <= 10000; n++)
+	for(int n = 1003; n <= 1003; n++)
 	{
-		for(int k = 1; k <= 9; k++)
+		for(int k = 0; k <= 0; k++)
 		{
 			// cout << "k = " << k << " n = "<< n << endl;
 			int a = s_a.digitCounts(k, n);
 			int b = s_c.digitCounts(k, n);
+			cout << "a = " << a << ", b = " << b << endl;
 			if(a != b)
 			{
 				cout << "error" << endl;
