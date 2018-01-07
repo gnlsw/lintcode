@@ -218,16 +218,17 @@ int main()
 	Solution_A s_a;
 	Solution_C s_c;
 
-	for(int n = 1003; n <= 1003; n++)
+	for(int n = 0; n <= 1003; n++)
 	{
-		for(int k = 0; k <= 0; k++)
+		for(int k = 0; k <= 9; k++)
 		{
-			// cout << "k = " << k << " n = "<< n << endl;
+			
 			int a = s_a.digitCounts(k, n);
 			int b = s_c.digitCounts(k, n);
-			cout << "a = " << a << ", b = " << b << endl;
 			if(a != b)
 			{
+				cout << "k = " << k << " n = "<< n << endl;
+				cout << "a = " << a << ", b = " << b << endl;
 				cout << "error" << endl;
 			}
 		}
