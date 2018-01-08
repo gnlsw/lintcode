@@ -213,18 +213,65 @@ public:
 	}
 };
 
+class Solution_D
+{
+public:
+	/*
+     * @param : An integer
+     * @param : An integer
+     * @return: An integer denote the count of digit k in 1..n
+     */
+	int digitCounts(int k, int n)
+	{
+		if((n == 0) && (k == 0))
+		{
+			return 1;
+		}
+
+		int num = n; // num为left与current的组合
+		int base = 1;
+		int count_sum = 0;
+		while(num > 0)
+		{
+			int digit = num % 10;
+			int count = 0;
+			if(digit > k)
+			{
+				count = (num / 10 + 1) * base;
+			}
+			else if(digit == k)
+			{
+				count = (num / 10) * base + (n - num * base + 1);
+			}
+			else
+			{
+				count = (num / 10) * base;
+			}
+			if((k == 0) && (base != 1))
+			{
+				count = count - base;
+			}
+			count_sum += count;
+
+			base = base * 10;
+			num = num / 10;
+		}
+		return count_sum;
+	}
+};
+
 int main()
 {
 	Solution_A s_a;
-	Solution_C s_c;
+	Solution_D s_d;
 
-	for(int n = 0; n <= 1003; n++)
+	for(int n = 1; n <= 10000; n++)
 	{
 		for(int k = 0; k <= 9; k++)
 		{
 			
 			int a = s_a.digitCounts(k, n);
-			int b = s_c.digitCounts(k, n);
+			int b = s_d.digitCounts(k, n);
 			if(a != b)
 			{
 				cout << "k = " << k << " n = "<< n << endl;
